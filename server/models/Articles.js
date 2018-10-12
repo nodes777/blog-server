@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 // Everything is derived from a Schema
-const { schema } = mongoose;
+const { Schema } = mongoose;
 
 // Define a schema for an article
 const ArticlesSchema = new Schema(
@@ -14,7 +14,7 @@ const ArticlesSchema = new Schema(
 );
 
 // methods must be added before compiling
-ArticleSchema.methods.toJSON = function() {
+ArticlesSchema.methods.toJSON = function() {
 	return {
 		// Mongoose assigns an _id field by default if one is not passed into the Schema constructor
 		_id: this._id,

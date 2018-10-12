@@ -51,7 +51,7 @@ mongoose.set("debug", true);
 // Add models
 require("./models/Articles");
 // Add routes
-//app.use(require("./routes"));
+app.use(require("./routes"));
 
 // 404 error handler, used on all routes???
 app.use((req, res, next) => {
