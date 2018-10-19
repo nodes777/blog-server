@@ -2,6 +2,10 @@ import axios from "axios";
 import React from "react";
 import { connect } from "react-redux";
 
+import ControlledTitleInput from "./ControlledTitleInput";
+import ControlledBodyInput from "./ControlledBodyInput";
+import ControlledAuthorInput from "./ControlledAuthorInput";
+
 class Form extends React.Component {
 	constructor(props) {
 		super(props);
@@ -19,25 +23,25 @@ class Form extends React.Component {
 	// if editting an article, return the new information as an object
 	// This indicates that state has changed, and componentDidUpdate will fire
 	// Can't use this.setState in here, so must go to componentDidUpdate
-	static getDerivedStateFromProps(nextProps, prevState) {
-		console.log(nextProps);
-		console.log(prevState);
-		if (
-			JSON.stringify(nextProps.articleToEdit) !==
-			JSON.stringify(prevState)
-		) {
-			console.log("returning new state");
-			console.log(nextProps);
-			console.log(prevState);
-			return {
-				title: prevState.title,
-				body: prevState.body,
-				author: prevState.author
-			}; // <- this is setState equivalent
-		} else {
-			return null;
-		}
-	}
+	// static getDerivedStateFromProps(nextProps, prevState) {
+	// 	console.log(nextProps);
+	// 	console.log(prevState);
+	// 	if (
+	// 		JSON.stringify(nextProps.articleToEdit) !==
+	// 		JSON.stringify(prevState)
+	// 	) {
+	// 		console.log("returning new state");
+	// 		console.log(nextProps);
+	// 		console.log(prevState);
+	// 		return {
+	// 			title: prevState.title,
+	// 			body: prevState.body,
+	// 			author: prevState.author
+	// 		}; // <- this is setState equivalent
+	// 	} else {
+	// 		return null;
+	// 	}
+	// }
 
 	// componentDidUpdate(prevProps, prevState) {
 	// 	// infinite loop with prevProps
@@ -101,11 +105,14 @@ class Form extends React.Component {
 		}
 	}
 
-	handleChangeField(key, event) {
+	handleChangeField = (key, event) => {
+		console.log(event);
+		console.log(key);
+		console.log(this.state);
 		this.setState({
 			[key]: event.target.value
 		});
-	}
+	};
 
 	render() {
 		const { articleToEdit } = this.props;
@@ -113,20 +120,21 @@ class Form extends React.Component {
 
 		return (
 			<div className="col-12 col-lg-6 offset-lg-3">
-				<input
-					onChange={ev => this.handleChangeField("title", ev)}
+				<ControlledTitleInput
+					handleChange={this.handleChangeField}
 					value={title}
 					className="form-control my-3"
 					placeholder="Article Title"
 				/>
-				<textarea
-					onChange={ev => this.handleChangeField("body", ev)}
+
+				<ControlledBodyInput
+					handleChange={this.handleChangeField}
 					className="form-control my-3"
 					placeholder="Article Body"
 					value={body}
 				/>
-				<input
-					onChange={ev => this.handleChangeField("author", ev)}
+				<ControlledAuthorInput
+					handleChange={this.handleChangeField}
 					value={author}
 					className="form-control my-3"
 					placeholder="Article Author"
