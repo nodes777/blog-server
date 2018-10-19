@@ -16,7 +16,45 @@ class Form extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
+	// if editting an article, return the new information as an object
+	// This indicates that state has changed, and componentDidUpdate will fire
+	// Can't use this.setState in here, so must go to componentDidUpdate
+	static getDerivedStateFromProps(nextProps, prevState) {
+		console.log(nextProps);
+		console.log(prevState);
+		if (nextProps.articleToEdit && this.state.title !== nextProps.title) {
+			return {
+				title: nextProps.articleToEdit.title,
+				body: nextProps.articleToEdit.body,
+				author: nextProps.articleToEdit.author
+			};
+		} else return null;
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		// infinite loop with prevProps
+		// no updates with prevState because the setState never fires
+		if (
+			prevProps.title !== this.state.title ||
+			prevProps.body !== this.state.body ||
+			prevProps.author !== this.state.author
+		) {
+			console.log(prevState);
+			console.log(this.state);
+			console.log(prevProps);
+			this.setState({
+				title: this.state.title,
+				body: this.state.body,
+				author: this.state.author
+			});
+			//this.classMethod();
+			//debugger;
+		}
+		console.log(this.state);
+	}
+	/* This is deprecated, covered by the above two methods
 	componentWillReceiveProps(nextProps) {
+		console.log(this);
 		if (nextProps.articleToEdit) {
 			this.setState({
 				title: nextProps.articleToEdit.title,
@@ -25,6 +63,7 @@ class Form extends React.Component {
 			});
 		}
 	}
+	*/
 
 	handleSubmit() {
 		const { onSubmit, articleToEdit, onEdit } = this.props;
