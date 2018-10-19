@@ -22,36 +22,44 @@ class Form extends React.Component {
 	static getDerivedStateFromProps(nextProps, prevState) {
 		console.log(nextProps);
 		console.log(prevState);
-		if (nextProps.articleToEdit && this.state.title !== nextProps.title) {
+		if (
+			JSON.stringify(nextProps.articleToEdit) !==
+			JSON.stringify(prevState)
+		) {
+			console.log("returning new state");
+			console.log(nextProps);
+			console.log(prevState);
 			return {
-				title: nextProps.articleToEdit.title,
-				body: nextProps.articleToEdit.body,
-				author: nextProps.articleToEdit.author
-			};
-		} else return null;
+				title: prevState.title,
+				body: prevState.body,
+				author: prevState.author
+			}; // <- this is setState equivalent
+		} else {
+			return null;
+		}
 	}
 
-	componentDidUpdate(prevProps, prevState) {
-		// infinite loop with prevProps
-		// no updates with prevState because the setState never fires
-		if (
-			prevProps.title !== this.state.title ||
-			prevProps.body !== this.state.body ||
-			prevProps.author !== this.state.author
-		) {
-			console.log(prevState);
-			console.log(this.state);
-			console.log(prevProps);
-			this.setState({
-				title: this.state.title,
-				body: this.state.body,
-				author: this.state.author
-			});
-			//this.classMethod();
-			//debugger;
-		}
-		console.log(this.state);
-	}
+	// componentDidUpdate(prevProps, prevState) {
+	// 	// infinite loop with prevProps
+	// 	// no updates with prevState because the setState never fires
+	// 	if (
+	// 		prevProps.title !== this.state.title ||
+	// 		prevProps.body !== this.state.body ||
+	// 		prevProps.author !== this.state.author
+	// 	) {
+	// 		console.log(prevState);
+	// 		console.log(this.state);
+	// 		console.log(prevProps);
+	// 		this.setState({
+	// 			title: this.state.title,
+	// 			body: this.state.body,
+	// 			author: this.state.author
+	// 		});
+	// 		//this.classMethod();
+	// 		//debugger;
+	// 	}
+	// 	console.log(this.state);
+	// }
 	/* This is deprecated, covered by the above two methods
 	componentWillReceiveProps(nextProps) {
 		console.log(this);
