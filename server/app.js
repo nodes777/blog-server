@@ -1,3 +1,4 @@
+// node app.js to start server
 // provides utilities for working with file and directory paths
 const path = require("path");
 // Express server framework
