@@ -11,8 +11,8 @@ import createHistory from "history/createBrowserHistory";
 import rootReducer from "../reducers";
 import Home from "../components/Home/home";
 import Header from "../components/Header/header";
-// import Articles from "../containers/Articles/Articles";
-// import ArticlesForm from "../containers/ArticlesForm/ArticlesForm";
+import Articles from "../containers/Articles/Articles";
+import ArticlesForm from "../containers/ArticlesForm/ArticlesForm";
 
 const store = createStore(rootReducer);
 
@@ -24,8 +24,8 @@ export default () => (
 				<Header />
 				<Switch>
 					<Route exact path="/" component={Home} />
-					{/*<Route path="/articles" component={Articles} />
-					<Route path="/articlesform" component={ArticlesForm} />*/}
+					<Route path="/articles" component={Articles} />
+					<Route path="/articlesform" component={ArticlesForm} />
 				</Switch>
 			</div>
 		</Router>
