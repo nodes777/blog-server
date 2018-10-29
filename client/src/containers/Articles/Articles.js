@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import NoArticles from "../../components/NoArticles/noArticles";
 import ShowArticles from "../../components/ShowArticles/showArticles";
-import { removeArticle } from "../../actions/articleActions";
-
+import { removeArticle, initalLoad } from "../../actions/articleActions";
+import axios from "axios";
 // This is a container component, no html
 // ShowArticles is a presentational component,
 class Articles extends Component {
@@ -14,10 +14,17 @@ class Articles extends Component {
   };
 
   componentDidMount = () => {
-    console.log(this.props.articles);
+    const { onLoad } = this.props;
+
+    axios("http://localhost:8000/api/articles").then(res => {
+      console.log("in componentDidMount");
+      console.log(res.data);
+      onLoad(res.data);
+    });
   };
 
   // fat arrow auto binds this
+  // move to the articlesform "page"
   handleAddArticle = () => this.props.history.push("/articlesform");
 
   handleCancelEdit = () => this.setState({ articleToEdit: "" });
@@ -25,7 +32,7 @@ class Articles extends Component {
   handleEditArticle = () => this.setState({ articleToEdit: id });
 
   // removeArticle is a method passed in as a prop? It is imported
-  handleRemoveArticle = () => this.props.removeArticle(id);
+  handleRemoveArticle = _id => this.props.removeArticle(_id);
 
   render = () =>
     isEmpty(this.props.articles) ? (
@@ -42,31 +49,35 @@ class Articles extends Component {
     );
 }
 
-export default connect(
-  // this is same as mapStateToProps, but just inline instead of a seperate func
-  state => ({ articles: state.blog.articles }),
-  // this is same as mapDispatchToProps but inline
-  // remove article is imported
-  { removeArticle }
-)(Articles);
-
 Articles.propTypes = {
   // expect an array of objects for propTypes
   articles: PropTypes.arrayOf(PropTypes.object),
-  removeArticle: PropTypes.func.isRequired
+  // this returns undefined when mappintDispatchToProps, but not when {removeArticle} why?
+  removeArticle: PropTypes.func.isRequired,
+  onLoad: PropTypes.func.isRequired
 };
 
-// const mapStateToProps = state => {
-//   return {
-//     articles: state.blog.articles
-//   }
-// }
+const mapStateToProps = state => {
+  return {
+    articles: state.blog.articles
+  };
+};
 
-// const mapDispatchToProps = dispatch => {
-//   return { // sample code, not valid
-//     destroyTodo: () =>
-//       dispatch({
-//         type: 'DESTROY_TODO'
-//       })
-//   }
-// }
+const mapDispatchToProps = dispatch => {
+  return {
+    removeArticle: id => {
+      console.log("in mapDispatchToProps");
+      console.log(id);
+      dispatch(removeArticle(id));
+    },
+    onLoad: data => {
+      console.log("in mapDispatchToProps");
+      console.log(data);
+      dispatch(initalLoad(data));
+    }
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Articles);

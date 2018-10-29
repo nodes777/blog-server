@@ -8,7 +8,7 @@ import { createStore } from "redux";
 // Provider "provides" access to the store to its children
 import { Provider } from "react-redux";
 import createHistory from "history/createBrowserHistory";
-import rootReducer from "../reducers";
+import rootReducer from "../reducers/reducer.js";
 import Home from "../components/Home/home";
 import Header from "../components/Header/header";
 import Articles from "../containers/Articles/Articles";

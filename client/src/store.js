@@ -5,10 +5,10 @@ import { createStore, combineReducers } from "redux";
 
 // reducers are pure functions that take the previous state and an action
 // reducers return the next state
-import { home } from "./reducers";
+import { index } from "./reducers/index.js";
 
 const reducers = combineReducers({
-	home
+	index
 });
 
 // The store is made of the reducers

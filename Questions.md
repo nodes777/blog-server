@@ -48,3 +48,14 @@ payload
 };
 
 ## 5) Lodash map vs native js map?
+
+## 6) Can't mapDispatchToProps and use PropTypes?
+
+client/src/containers/Articles/Articles.js
+
+Articles.propTypes = {
+// expect an array of objects for propTypes
+articles: PropTypes.arrayOf(PropTypes.object),
+// this returns undefined when mappintDispatchToProps, but not when {removeArticle} why?
+//removeArticle: PropTypes.func.isRequired
+};

@@ -7,7 +7,8 @@ import {
 	EDIT_ARTICLE,
 	UPDATE_ARTICLE,
 	REMOVE_ARTICLE,
-	RESET_EDIT_ARTICLE
+	RESET_EDIT_ARTICLE,
+	ARTICLES_LOADED
 } from "../types";
 import uuid from "uuid/v1";
 import moment from "moment";
@@ -18,13 +19,14 @@ const currentDate = () =>
 		.utcOffset(-7)
 		.toISOString(true);
 
-const initialState = axios
-	.get(`http://localhost:8000/api/articles`)
-	.then(res => {
-		console.log(res.data);
-		const data = res.data;
-		return data;
-	});
+const initialState = [];
+// axios
+// 	.get(`http://localhost:8000/api/articles`)
+// 	.then(res => {
+// 		console.log(res.data);
+// 		const data = res.data;
+// 		return data;
+// 	});
 
 // articles: [
 // 		{
@@ -64,15 +66,29 @@ const articlesReducer = (state = initialState, { type, payload }) => {
 				)
 			};
 		case REMOVE_ARTICLE:
+			console.log("in REMOVE_ARTICLE reducer");
+			console.log(state);
+			console.log(payload);
+			let newArticles = filter(state.articles, ({ _id }) => {
+				return _id !== payload;
+			});
+			console.log(newArticles);
 			return {
 				...state,
-				articles: filter(state.articles, ({ id }) => id !== payload)
+				articles: newArticles
 			};
 		// where is articleToEdit defined?
 		case EDIT_ARTICLE:
 			return { ...state, articleToEdit: payload };
 		case RESET_EDIT_ARTICLE:
 			return { ...state, articleToEdit: "" };
+		case ARTICLES_LOADED:
+			console.log("in reducer");
+			console.log(payload);
+			return {
+				...state,
+				articles: payload
+			};
 		default:
 			return state;
 	}
