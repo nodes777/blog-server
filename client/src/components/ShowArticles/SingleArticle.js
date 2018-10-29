@@ -9,7 +9,8 @@ class SingleArticle extends Component {
 			body,
 			author,
 			createdAt,
-			handleRemoveArticle
+			handleRemoveArticle,
+			handleEditArticle
 		} = this.props;
 		return (
 			<div key={id} className="card my-3">

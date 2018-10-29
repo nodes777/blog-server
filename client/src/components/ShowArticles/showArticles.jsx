@@ -47,6 +47,7 @@ class ShowArticles extends Component {
 								body={body}
 								title={title}
 								handleRemoveArticle={handleRemoveArticle}
+								handleEditArticle={handleEditArticle}
 							/>
 						);
 					}

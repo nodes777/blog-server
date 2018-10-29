@@ -29,7 +29,7 @@ class Articles extends Component {
 
   handleCancelEdit = () => this.setState({ articleToEdit: "" });
 
-  handleEditArticle = () => this.setState({ articleToEdit: id });
+  handleEditArticle = id => this.setState({ articleToEdit: id });
 
   // removeArticle is a method passed in as a prop? It is imported
   handleRemoveArticle = _id => this.props.removeArticle(_id);

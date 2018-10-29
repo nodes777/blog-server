@@ -37,12 +37,18 @@ export const addArticle = (payload, history) => {
 	};
 };
 
-export const removeArticle = payload => ({
-	type: REMOVE_ARTICLE,
-	// payload is deconstructed in the reducer, and id is taken out,
-	// the articles are filtered for id and the state is returned
-	payload
-});
+export const removeArticle = payload => {
+	console.log("in articleActions removeArticle");
+	console.log(payload);
+	let id = payload;
+	axios.delete(`http://localhost:8000/api/articles/${id}`);
+	return {
+		type: REMOVE_ARTICLE,
+		// payload is deconstructed in the reducer, and id is taken out,
+		// the articles are filtered for id and the state is returned
+		payload
+	};
+};
 
 export const resetEditArticle = () => ({
 	type: RESET_EDIT_ARTICLE
