@@ -13,7 +13,7 @@ const ShowForm = ({
 	title
 }) => (
 	<Fragment>
-		<form onSubmit={handleSubmit} className="col-12 col-lg-6 offset-lg-3">
+		<form onSubmit={handleSubmit} className="my-3">
 			<input
 				type="text"
 				name="title"
@@ -46,7 +46,7 @@ const ShowForm = ({
 			<button
 				disabled={!author || !body || !title}
 				type="submit"
-				className="btn btn-primary float-right"
+				className="btn btn-primary ml-3"
 			>
 				{id ? "Update" : "Submit"}
 			</button>

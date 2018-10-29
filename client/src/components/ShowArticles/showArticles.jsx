@@ -30,14 +30,16 @@ class ShowArticles extends Component {
 				{map(articles, ({ _id, author, body, createdAt, title }) => {
 					let id = _id;
 					if (articleToEdit === id) {
-						<ArticlesForm
-							key={id}
-							handleCancelEdit={handleCancelEdit}
-							id={id}
-							author={author}
-							body={body}
-							title={title}
-						/>;
+						return (
+							<ArticlesForm
+								key={id}
+								handleCancelEdit={handleCancelEdit}
+								id={id}
+								author={author}
+								body={body}
+								title={title}
+							/>
+						);
 					} else {
 						return (
 							<SingleArticle

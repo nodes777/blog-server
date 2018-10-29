@@ -29,7 +29,10 @@ class Articles extends Component {
 
   handleCancelEdit = () => this.setState({ articleToEdit: "" });
 
-  handleEditArticle = id => this.setState({ articleToEdit: id });
+  handleEditArticle = id => {
+    console.log(id);
+    this.setState({ articleToEdit: id });
+  };
 
   // removeArticle is a method passed in as a prop? It is imported
   handleRemoveArticle = _id => this.props.removeArticle(_id);
@@ -53,6 +56,7 @@ Articles.propTypes = {
   // expect an array of objects for propTypes
   articles: PropTypes.arrayOf(PropTypes.object),
   // this returns undefined when mappintDispatchToProps, but not when {removeArticle} why?
+  // Because export connect needed to be below
   removeArticle: PropTypes.func.isRequired,
   onLoad: PropTypes.func.isRequired
 };
