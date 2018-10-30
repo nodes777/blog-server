@@ -12,7 +12,7 @@ const ShowForm = ({
 	id,
 	title
 }) => (
-	<Fragment>
+	<div className="m-4">
 		<form onSubmit={handleSubmit} className="my-3">
 			<input
 				type="text"
@@ -52,7 +52,7 @@ const ShowForm = ({
 			</button>
 		</form>
 		<div className="clear-fix" />
-	</Fragment>
+	</div>
 );
 
 export default ShowForm;

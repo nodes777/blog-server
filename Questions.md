@@ -60,12 +60,8 @@ articles: PropTypes.arrayOf(PropTypes.object),
 //removeArticle: PropTypes.func.isRequired
 };
 
-### Current Problem
+### Former Problem
 
 In Articles.js, I'm doing componentDidMount() which loads the articles from the axios call to the server. This might not have the newly added article. So the articles are rendered without the newly added one.
 
-Solutions:
-
-Wait until patch is complete in articleActions?
-
-Check in componentDidMount?
+Solution: Check if articles exist in props yet. If not you need inital load, otherwise you already have them and can just render.
