@@ -16,6 +16,14 @@ export const editArticle = payload => ({
 
 // we have payload and history as params, but only using payload?
 export const updateArticle = (payload, history) => {
+	console.log("in articleActions updateArticle");
+	console.log(payload);
+	const { title, body, author, id } = payload;
+	axios.patch(`http://localhost:8000/api/articles/${id}`, {
+		title,
+		body,
+		author
+	});
 	return {
 		type: UPDATE_ARTICLE,
 		payload

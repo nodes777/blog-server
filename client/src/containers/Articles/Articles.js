@@ -15,7 +15,6 @@ class Articles extends Component {
 
   componentDidMount = () => {
     const { onLoad } = this.props;
-
     axios("http://localhost:8000/api/articles").then(res => {
       console.log("in componentDidMount");
       console.log(res.data);
@@ -30,12 +29,11 @@ class Articles extends Component {
   handleCancelEdit = () => this.setState({ articleToEdit: "" });
 
   handleEditArticle = id => {
-    console.log(id);
     this.setState({ articleToEdit: id });
   };
 
   // removeArticle is a method passed in as a prop? It is imported
-  handleRemoveArticle = _id => this.props.removeArticle(_id);
+  handleRemoveArticle = id => this.props.removeArticle(id);
 
   render = () =>
     isEmpty(this.props.articles) ? (

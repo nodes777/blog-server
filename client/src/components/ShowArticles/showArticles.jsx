@@ -27,8 +27,8 @@ class ShowArticles extends Component {
 					</button>
 				</div>
 
-				{map(articles, ({ _id, author, body, createdAt, title }) => {
-					let id = _id;
+				{map(articles, ({ id, author, body, createdAt, title }) => {
+					// let id = id;
 					if (articleToEdit === id) {
 						return (
 							<ArticlesForm

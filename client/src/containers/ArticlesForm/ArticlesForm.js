@@ -33,6 +33,7 @@ class ArticlesForm extends Component {
 		if (id) {
 			// from actions
 			updateArticle(this.state);
+
 			// clears the form and state for the form
 			handleCancelEdit();
 		} else {

@@ -17,7 +17,7 @@ const ArticlesSchema = new Schema(
 ArticlesSchema.methods.toJSON = function() {
 	return {
 		// Mongoose assigns an _id field by default if one is not passed into the Schema constructor
-		_id: this._id,
+		id: this._id,
 		title: this.title,
 		body: this.body,
 		author: this.author,

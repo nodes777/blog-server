@@ -52,25 +52,27 @@ const articlesReducer = (state = initialState, { type, payload }) => {
 				]
 			};
 		case UPDATE_ARTICLE:
+			console.log("In UPDATE_ARTICLE");
+			console.log(payload);
+			let x = map(
+				state.articles,
+				article =>
+					// if the article (stored posts) match the payload id
+					// replace it with the payload
+					// else use the article again
+					article.id === payload.id ? { ...payload } : { ...article }
+			);
+			console.log(x);
 			return {
 				...state,
-				articles: map(
-					state.articles,
-					article =>
-						// if the article (stored posts) match the payload id
-						// replace it with the payload
-						// else use the article again
-						article.id === payload.id
-							? { ...payload }
-							: { ...article }
-				)
+				articles: x
 			};
 		case REMOVE_ARTICLE:
 			console.log("in REMOVE_ARTICLE reducer");
 			console.log(state);
 			console.log(payload);
-			let newArticles = filter(state.articles, ({ _id }) => {
-				return _id !== payload;
+			let newArticles = filter(state.articles, ({ id }) => {
+				return id !== payload;
 			});
 			console.log(newArticles);
 			return {

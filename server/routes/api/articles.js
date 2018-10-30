@@ -123,7 +123,7 @@ router.patch("/:id", (req, res, next) => {
 
 // DELETE a resource by id
 router.delete("/:id", (req, res, next) => {
-	return Articles.findByIdAndRemove(req.article._id)
+	return Articles.findByIdAndRemove(req.article.id)
 		.then(() => res.sendStatus(200))
 		.catch(next);
 });
