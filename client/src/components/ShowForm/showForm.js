@@ -10,9 +10,10 @@ const ShowForm = ({
 	handleChange,
 	handleSubmit,
 	id,
-	title
+	title,
+	className = "m-4"
 }) => (
-	<div className="m-4">
+	<div className={className}>
 		<form onSubmit={handleSubmit} className="my-3">
 			<input
 				type="text"

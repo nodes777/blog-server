@@ -38,6 +38,7 @@ class ShowArticles extends Component {
 								author={author}
 								body={body}
 								title={title}
+								className={"m-4"}
 							/>
 						);
 					} else {
@@ -59,17 +60,6 @@ class ShowArticles extends Component {
 	}
 }
 
-// const ShowArticles = ({
-// 	articles,
-// 	articleToEdit,
-// 	handleAddArticle,
-// 	handleCancelEdit,
-// 	handleEditArticle,
-// 	handleRemoveArticle
-// }) => (
-
-// );
-
 export default ShowArticles;
 
 ShowArticles.propTypes = {
@@ -80,43 +70,3 @@ ShowArticles.propTypes = {
 	handleEditArticle: PropTypes.func,
 	handleRemoveArticle: PropTypes.func
 };
-// {map(articles, ({ id, author, body, createdAt, title }) => {
-// 					if (articleToEdit === id) {
-// 						<ArticlesForm
-// 							key={id}
-// 							handleCancelEdit={handleCancelEdit}
-// 							id={id}
-// 							author={author}
-// 							body={body}
-// 							title={title}
-// 						/>;
-// 					} else {
-// 						// refactor this into its own component
-// 						<div key={id} className="card my-3">
-// 							<div className="card-header">{title}</div>
-// 							<div className="card-body">
-// 								{body}
-// 								<p className="mt-5 text-muted">
-// 									{"posted by"} <b>{author}</b> (
-// 									{moment(createdAt).fromNow()})
-// 								</p>
-// 							</div>
-// 							<div className="card-footer">
-// 								<div className="row">
-// 									<button
-// 										className="btn btn-primary mx-3"
-// 										onClick={() => handleEditArticle(id)}
-// 									>
-// 										Edit
-// 									</button>
-// 									<button
-// 										className="btn btn-danger"
-// 										onClick={() => handleRemoveArticle(id)}
-// 									>
-// 										Delete
-// 									</button>
-// 								</div>
-// 							</div>
-// 						</div>;
-// 					}
-// 				})}

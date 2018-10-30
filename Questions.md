@@ -23,7 +23,7 @@ client/src/reducers/index.js
 
 We import actions from a folder of types, why not just keep them here?
 
--   Because we use them in actions too, better to import them from a single place
+-   Because we use them in actions and reducers too, better to import them from a single place
 
 ## 4) Why get the methods from props from within the submit?
 
