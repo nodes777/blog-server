@@ -14,12 +14,16 @@ class Articles extends Component {
   };
 
   componentDidMount = () => {
-    const { onLoad } = this.props;
-    axios("http://localhost:8000/api/articles").then(res => {
-      console.log("in componentDidMount");
-      console.log(res.data);
-      onLoad(res.data);
-    });
+    const { onLoad, articles } = this.props;
+
+    // if its the first load, there's no articles, so make a server call
+    if (!articles) {
+      axios("http://localhost:8000/api/articles").then(res => {
+        console.log("in componentDidMount");
+        console.log(res.data);
+        onLoad(res.data);
+      });
+    }
   };
 
   // fat arrow auto binds this

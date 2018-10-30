@@ -34,6 +34,7 @@ export const addArticle = (payload, history) => {
 	const { title, body, author } = payload;
 	history.push("/articles");
 	// post to the server
+	console.log("in addArticle");
 	axios.post("http://localhost:8000/api/articles", {
 		title,
 		body,
@@ -66,19 +67,3 @@ export const initalLoad = data => ({
 	type: "ARTICLES_LOADED",
 	payload: data.articles
 });
-
-// export const initalLoad = () => {
-// 	return axios
-// 		.get(`http://localhost:8000/api/articles`)
-// 		.then(res => {
-// 			const data = res.data;
-// 			return data;
-// 		})
-// 		.then(articles => {
-// 			console.log("initalLoad Complete: " + articles);
-// 			return {
-// 				type: INITIAL_LOAD,
-// 				payload: articles
-// 			};
-// 		});
-// };

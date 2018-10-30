@@ -20,28 +20,12 @@ const currentDate = () =>
 		.toISOString(true);
 
 const initialState = [];
-// axios
-// 	.get(`http://localhost:8000/api/articles`)
-// 	.then(res => {
-// 		console.log(res.data);
-// 		const data = res.data;
-// 		return data;
-// 	});
-
-// articles: [
-// 		{
-// 			id: uuid(),
-// 			author: "Mr. Magoo",
-// 			title: "Lorem ipsum dolor!",
-// 			body:
-// 				"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-// 			createdAt: currentDate()
-// 		}
-// 	]
 
 const articlesReducer = (state = initialState, { type, payload }) => {
 	switch (type) {
 		case ADD_ARTICLE:
+			console.log("In ADD_ARTICLE");
+			console.log(payload);
 			return {
 				//why do we deconstruct state here, and again in the articles?
 				// its any other parts of state we may have, and then the articles
