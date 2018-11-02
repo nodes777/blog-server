@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { Router, Switch, Route } from "react-router-dom";
 import { createStore } from "redux";
 
@@ -13,21 +13,32 @@ import Home from "../components/Home/home";
 import Header from "../components/Header/header";
 import Articles from "../containers/Articles/Articles";
 import ArticlesForm from "../containers/ArticlesForm/ArticlesForm";
+import GoogleAuth from "../components/GoogleAuth/GoogleAuth";
 
 const store = createStore(rootReducer);
 
 // is this js or jsx? sandbox has it as js but...
-export default () => (
-	<Provider store={store}>
-		<Router history={createHistory()}>
-			<div>
-				<Header />
-				<Switch>
-					<Route exact path="/" component={Home} />
-					<Route path="/articles" component={Articles} />
-					<Route path="/articlesform" component={ArticlesForm} />
-				</Switch>
-			</div>
-		</Router>
-	</Provider>
-);
+class App extends Component {
+	render() {
+		return (
+			<Provider store={store}>
+				<Router history={createHistory()}>
+					<div>
+						<Header />
+						<Switch>
+							<Route exact path="/" component={Home} />
+							<Route path="/articles" component={Articles} />
+							<Route
+								path="/articlesform"
+								component={ArticlesForm}
+							/>
+							<Route path="/auth" component={GoogleAuth} />
+						</Switch>
+					</div>
+				</Router>
+			</Provider>
+		);
+	}
+}
+
+export default App;

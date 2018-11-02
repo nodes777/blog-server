@@ -14,6 +14,8 @@ const errorHandler = require("errorhandler");
 // MongoDB object modelling tool designed to work in async environment
 const mongoose = require("mongoose");
 
+const passport = require("passport");
+
 // mongoose's promise system is deprecated, use node's instead
 mongoose.promise = global.promise;
 
@@ -41,6 +43,9 @@ app.use(
 		saveUninitialized: false
 	})
 );
+
+app.use(passport.initialize());
+require("./config/passport");
 
 if (!isProduction) {
 	app.use(errorHandler());

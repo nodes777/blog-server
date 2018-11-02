@@ -72,8 +72,8 @@ const articlesReducer = (state = initialState, { type, payload }) => {
 			console.log("in reducer");
 			console.log(payload);
 			return {
-				...state,
-				articles: payload
+				...state, // deconstruct this
+				articles: [...payload]
 			};
 		default:
 			return state;

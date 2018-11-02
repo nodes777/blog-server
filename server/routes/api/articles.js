@@ -54,7 +54,7 @@ router.post("/", (req, res, next) => {
 	);
 });
 
-// on get request for the home page
+// on get request for the /articles page
 router.get("/", (req, res, next) => {
 	// get all articles
 	return (
