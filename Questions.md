@@ -65,3 +65,11 @@ articles: PropTypes.arrayOf(PropTypes.object),
 In Articles.js, I'm doing componentDidMount() which loads the articles from the axios call to the server. This might not have the newly added article. So the articles are rendered without the newly added one.
 
 Solution: Check if articles exist in props yet. If not you need inital load, otherwise you already have them and can just render.
+
+### CORS Problem
+
+I was getting a CORS error when trying to send the initial call to Google+ API.
+
+Soluton: use a link element in html instead of doing componentDidMount, not sure why I was doing that anyway
+
+https://stackoverflow.com/questions/42002777/cors-facebook-passport

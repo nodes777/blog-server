@@ -1,5 +1,5 @@
 const router = require("express").Router();
-// /api/articles
-router.use("/articles", require("./articles"));
+// /auth/auth
+router.use("/auth", require("./blogAuth"));
 
 module.exports = router;

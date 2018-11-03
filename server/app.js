@@ -16,6 +16,8 @@ const mongoose = require("mongoose");
 
 const passport = require("passport");
 
+const passportSetup = require("./config/passport");
+
 // mongoose's promise system is deprecated, use node's instead
 mongoose.promise = global.promise;
 
@@ -45,7 +47,6 @@ app.use(
 );
 
 app.use(passport.initialize());
-require("./config/passport");
 
 if (!isProduction) {
 	app.use(errorHandler());
