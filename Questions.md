@@ -73,3 +73,17 @@ I was getting a CORS error when trying to send the initial call to Google+ API.
 Soluton: use a link element in html instead of doing componentDidMount, not sure why I was doing that anyway
 
 https://stackoverflow.com/questions/42002777/cors-facebook-passport
+
+### Google Redirect Problem
+
+Couldnt get find the redirect route after Google sent back token.
+
+Solution: I wasnt aware of the way the index.js routing was working
+
+api/auth/google/redirect etc
+
+became
+
+auth/auth/google/redirect
+
+Had to make sure these all lined up in config/passport.js and Google console and in router

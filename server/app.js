@@ -15,7 +15,7 @@ const errorHandler = require("errorhandler");
 const mongoose = require("mongoose");
 
 const passport = require("passport");
-
+const keys = require("./config/keys");
 const passportSetup = require("./config/passport");
 
 // mongoose's promise system is deprecated, use node's instead
@@ -46,14 +46,18 @@ app.use(
 	})
 );
 
+// mongoose.connect("mongodb://localhost/lightblog");
+mongoose.set("debug", true);
+mongoose.connect(
+	keys.mongodb.dbURI,
+	() => console.log("connected to mLab")
+);
+
 app.use(passport.initialize());
 
 if (!isProduction) {
 	app.use(errorHandler());
 }
-
-mongoose.connect("mongodb://localhost/lightblog");
-mongoose.set("debug", true);
 
 // Add models
 require("./models/Articles");
