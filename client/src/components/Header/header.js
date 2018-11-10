@@ -12,6 +12,11 @@ export default () => (
 				<li style={{ display: "inline", marginRight: 10 }}>
 					<Link to="/articles">Articles</Link>
 				</li>
+				<li style={{ display: "inline", marginRight: 10 }}>
+					<a href="http://localhost:8000/auth/auth">
+						Login with Google
+					</a>
+				</li>
 			</ul>
 		</nav>
 	</header>

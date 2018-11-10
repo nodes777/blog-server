@@ -75,6 +75,8 @@ module.exports = {
 	devServer: {
 		historyApiFallback: true,
 		publicPath: "/",
-		contentBase: "./dist"
+		contentBase: "./dist",
+		port: 8080,
+		proxy: { "/api/**": { target: "http://localhost:8000", secure: false } }
 	}
 };

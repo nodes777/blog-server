@@ -16,7 +16,7 @@ router.get(
 // passport.authenticate fires (in passport.js) before this next function
 router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
 	//res.send("you reached the redirect URI" + req.user);
-	// HOW TO REDIRECT TO LOCALHOST:8080 DYNAMICALLY WITH re.user???
+	// HOW TO REDIRECT TO LOCALHOST:8080 DYNAMICALLY WITH req.user???
 
 	res.redirect("../../../articles");
 });
