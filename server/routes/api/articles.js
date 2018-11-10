@@ -56,6 +56,9 @@ router.post("/", (req, res, next) => {
 
 // on get request for the /articles page
 router.get("/", (req, res, next) => {
+	if (req.user) {
+		console.log(` Logged in as ${req.user.username}`);
+	}
 	// get all articles
 	return (
 		Articles.find()

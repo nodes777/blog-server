@@ -13,6 +13,8 @@ const cors = require("cors");
 const errorHandler = require("errorhandler");
 // MongoDB object modelling tool designed to work in async environment
 const mongoose = require("mongoose");
+// takes a cookie and sets max-age and encrypts, that can go to browser
+const cookieSession = require("cookie-session");
 
 const passport = require("passport");
 const keys = require("./config/keys");
@@ -29,6 +31,15 @@ const app = express();
 app.use(cors());
 // Morgan is a http request logger, log in the 'dev' format
 app.use(require("morgan")("dev"));
+
+app.use(
+	cookieSession({
+		// 1 day
+		maxAge: 24 * 60 * 60 * 100,
+		keys: [keys.session.cookieKey]
+	})
+);
+
 // only parses urlencoded bodies and only looks at requests where the Content-Type header matches the type option
 // when false, parses the URL-encoded data with the querystring library
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -54,6 +65,7 @@ mongoose.connect(
 );
 
 app.use(passport.initialize());
+app.use(passport.session());
 
 if (!isProduction) {
 	app.use(errorHandler());

@@ -3,12 +3,16 @@ const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 const keys = require("./keys");
 const User = require("../models/User");
 
-// passport.serializeUser((user, done) => {
-//   done(null, user);
-// });
-// passport.deserializeUser((user, done) => {
-//   done(null, user);
-// });
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id).then(user => {
+    done(null, user);
+  });
+});
+
 passport.use(
   new GoogleStrategy(
     {
@@ -18,23 +22,26 @@ passport.use(
     },
     // fires in blogAuth router.get("/google/redirect"
     (accessToken, refreshToken, profile, done) => {
-      console.log("in GoogleStrategy");
-      console.log(profile);
-
-      new User({
-        googleId: profile.id,
-        username: profile.displayName
-      })
-        .save()
-        .then(newUser => {
-          console.log("new user created: ", newUser);
-        });
-      // const userData = {
-      //   email: profile.emails[0].value,
-      //   name: profile.displayName,
-      //   token: accessToken
-      // };
-      // done(null, userData);
+      // findOne looks for a googleId prop matching a profile.id, that comes from Google
+      // if it finds a match, it returns that user
+      User.findOne({ googleId: profile.id }).then(currentUser => {
+        // if we have a user
+        if (currentUser) {
+          console.log(`User is ${currentUser}`);
+          done(null, currentUser);
+        } else {
+          // we don't have a user
+          new User({
+            googleId: profile.id,
+            username: profile.displayName
+          })
+            .save()
+            .then(newUser => {
+              console.log("new user created: ", newUser);
+              done(null, newUser);
+            });
+        }
+      });
     }
   )
 );
