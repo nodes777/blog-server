@@ -27,7 +27,10 @@ class App extends Component {
 						<Header />
 						<Switch>
 							<Route exact path="/" component={Home} />
+							<Route path="/articles/:id" component={Articles} />
+
 							<Route path="/articles" component={Articles} />
+
 							<Route
 								path="/articlesform"
 								component={ArticlesForm}

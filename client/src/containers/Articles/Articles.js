@@ -6,6 +6,9 @@ import NoArticles from "../../components/NoArticles/noArticles";
 import ShowArticles from "../../components/ShowArticles/showArticles";
 import { removeArticle, initalLoad } from "../../actions/articleActions";
 import axios from "axios";
+
+import { handleLoggedIn } from "../../actions/loginActions";
+
 // This is a container component, no html
 // ShowArticles is a presentational component,
 class Articles extends Component {
@@ -15,17 +18,20 @@ class Articles extends Component {
 
   componentDidMount = () => {
     const { onLoad, articles, loggedIn } = this.props;
+    const token = this.props.match.params.id;
+    // need to remove slashes from hash, then don't show up in token
+    console.log(token);
 
     // if its the first load, there's no articles, so make a server call, this eventually goes to mLab
     if (!articles) {
       axios("http://localhost:8000/api/articles").then(res => {
-        console.log("in componentDidMount");
-        console.log(res.data);
         onLoad(res.data);
       });
     }
 
-    if (loggedIn) {
+    if (token) {
+      console.log("Taylor is logged in");
+      handleLoggedIn(token);
     }
   };
 
@@ -83,6 +89,9 @@ const mapDispatchToProps = dispatch => {
       console.log("in mapDispatchToProps");
       console.log(data);
       dispatch(initalLoad(data));
+    },
+    handleLoggedIn: token => {
+      dispatch(handleLoggedIn(token));
     }
   };
 };

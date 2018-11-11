@@ -20,7 +20,7 @@ router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
 	let saltRounds = 3;
 	console.log(req.user._id);
 	bcrypt.hash(req.user._id.toString(), saltRounds, function(err, hash) {
-		res.redirect(`http://localhost:8080/articles#${hash}`);
+		res.redirect(`http://localhost:8080/articles/${hash}`);
 	});
 
 	// HOW TO REDIRECT TO LOCALHOST:8080 DYNAMICALLY WITH req.user???
