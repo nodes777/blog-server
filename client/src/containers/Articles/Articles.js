@@ -14,7 +14,7 @@ class Articles extends Component {
   };
 
   componentDidMount = () => {
-    const { onLoad, articles } = this.props;
+    const { onLoad, articles, loggedIn } = this.props;
 
     // if its the first load, there's no articles, so make a server call, this eventually goes to mLab
     if (!articles) {
@@ -23,6 +23,9 @@ class Articles extends Component {
         console.log(res.data);
         onLoad(res.data);
       });
+    }
+
+    if (loggedIn) {
     }
   };
 
