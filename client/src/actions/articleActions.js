@@ -35,10 +35,22 @@ export const addArticle = (payload, history) => {
 	history.push("/articles");
 	// post to the server
 	console.log("in addArticle");
-	axios.post("http://localhost:8000/api/articles", {
-		title,
-		body,
-		author
+	// // axios.post("http://localhost:8000/api/articles", {
+	// 		title,
+	// 		body,
+	// 		author
+	// 	});
+
+	axios({
+		method: "post",
+		withCredentials: true,
+		headers: { "X-Requested-With": "XMLHttpRequest" },
+		url: "http://localhost:8000/api/articles",
+		data: {
+			title,
+			body,
+			author
+		}
 	});
 	return {
 		type: ADD_ARTICLE,

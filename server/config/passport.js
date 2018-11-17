@@ -28,18 +28,20 @@ passport.use(
         // if we have a user
         if (currentUser) {
           console.log(`User is ${currentUser}`);
+
           done(null, currentUser);
         } else {
           // we don't have a user
-          new User({
-            googleId: profile.id,
-            username: profile.displayName
-          })
-            .save()
-            .then(newUser => {
-              console.log("new user created: ", newUser);
-              done(null, newUser);
-            });
+          console.log("No you can't create a new user");
+          // new User({
+          //   googleId: profile.id,
+          //   username: profile.displayName
+          // })
+          //   .save()
+          //   .then(newUser => {
+          //     console.log("new user created: ", newUser);
+          //     done(null, newUser);
+          //   });
         }
       });
     }

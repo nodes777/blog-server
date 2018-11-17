@@ -87,3 +87,24 @@ became
 auth/auth/google/redirect
 
 Had to make sure these all lined up in config/passport.js and Google console and in router
+
+### Session is Undefined Problem
+
+Session is empty when making a post request, but we need it to validate that its me making the POST.
+
+Session has user info when we return from the auth flow.
+
+in blogAuth.js: req.session is defined.
+`bcrypt.hash(req.user._id.toString(), saltRounds, function(err, hash) { req.session.user = hash; console.log(req.session); res.redirect(`http://localhost:8080/articles/loggedIn`);
+});`
+
+in api/articles.js: req.session is undefined
+`router.post("/", (req, res, next) => { // get the body from the request const { body } = req; // session is undefined here. Why? console.log(`Sessio, ${req.session.user}`); console.log(req.session);`
+
+I have tried:
+Including proxy in the client package.json: https://stackoverflow.com/questions/51803692/express-req-session-empty-with-cookie-session
+
+using withCredentials set to true when sending the POST from the client:https://stackoverflow.com/questions/16434893/node-express-passport-req-user-undefined?noredirect=1&lq=1
+
+Rearranging the order of middleware:
+Routes must always come afterward

@@ -28,7 +28,12 @@ const isProduction = process.env.NODE_ENV === "production";
 const app = express();
 
 // enable all middleware
-app.use(cors());
+
+let corsOptions = {
+	credentials: true,
+	origin: "http://localhost:8080"
+};
+app.use(cors(corsOptions));
 // Morgan is a http request logger, log in the 'dev' format
 app.use(require("morgan")("dev"));
 

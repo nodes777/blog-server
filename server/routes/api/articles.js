@@ -15,6 +15,10 @@ const Articles = mongoose.model("Articles");
 router.post("/", (req, res, next) => {
 	// get the body from the request
 	const { body } = req;
+	// session is undefined here. Why?
+	console.log(`Sessio, ${req.session.user}`);
+	console.log(req.session);
+	console.log(req);
 
 	// return error if submitted without a title/author/body
 	if (!body.title) {
