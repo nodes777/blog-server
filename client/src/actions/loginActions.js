@@ -1,10 +1,9 @@
 import { LOGGED_IN } from "../types";
 
-export const handleLoggedIn = payload => {
+export const logInAction = payload => {
 	console.log("in loginActions handleLoggedIn");
-	console.log(payload);
-	const token = payload;
 	// store session token
+	console.log(payload)
 	return {
 		type: LOGGED_IN,
 		payload

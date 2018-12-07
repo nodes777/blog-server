@@ -5,9 +5,10 @@ import { connect } from "react-redux";
 import NoArticles from "../../components/NoArticles/noArticles";
 import ShowArticles from "../../components/ShowArticles/showArticles";
 import { removeArticle, initalLoad } from "../../actions/articleActions";
+import { logInAction } from "../../actions/loginActions";
+
 import axios from "axios";
 
-import { handleLoggedIn } from "../../actions/loginActions";
 
 // This is a container component, no html
 // ShowArticles is a presentational component,
@@ -17,10 +18,10 @@ class Articles extends Component {
   };
 
   componentDidMount = () => {
-    const { onLoad, articles, loggedIn } = this.props;
-    const token = this.props.match.params.id;
-    // need to remove slashes from hash, then don't show up in token
-    console.log(token);
+    const { onLoad, articles, loggedIn, handleLoggedIn } = this.props;
+    const urlLoggedIn = this.props.match.params.id;
+    // need to remove slashes from hash, then don't show up in urlLoggedIn
+    console.log(this.props);
 
     // if its the first load, there's no articles, so make a server call, this eventually goes to mLab
     if (!articles) {
@@ -29,9 +30,15 @@ class Articles extends Component {
       });
     }
 
-    if (token) {
-      console.log("Taylor is logged in");
-      handleLoggedIn(token);
+    // Login URL Check
+    if (urlLoggedIn) {
+      console.log("Url is loggedIn");
+      handleLoggedIn(urlLoggedIn);
+    } 
+    // Actually logged in check
+    if(loggedIn){
+      console.log(`Logged In Check Passes: ${loggedIn}`)
+      alert("YOU'RE LOGGED IN IN STATE!")
     }
   };
 
@@ -69,29 +76,28 @@ Articles.propTypes = {
   // this returns undefined when mappintDispatchToProps, but not when {removeArticle} why?
   // Because export connect needed to be below
   removeArticle: PropTypes.func.isRequired,
-  onLoad: PropTypes.func.isRequired
+  onLoad: PropTypes.func.isRequired,
+  //handleLoggedIn: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
+  console.log(state)
   return {
-    articles: state.blog.articles
+    articles: state.blog.articles,
+    loggedIn: state.login.loggedIn
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     removeArticle: id => {
-      console.log("in mapDispatchToProps");
-      console.log(id);
       dispatch(removeArticle(id));
     },
     onLoad: data => {
-      console.log("in mapDispatchToProps");
-      console.log(data);
       dispatch(initalLoad(data));
     },
-    handleLoggedIn: token => {
-      dispatch(handleLoggedIn(token));
+    handleLoggedIn: urlLoggedIn => {
+      dispatch(logInAction(urlLoggedIn));
     }
   };
 };

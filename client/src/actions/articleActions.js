@@ -4,7 +4,7 @@ import {
 	UPDATE_ARTICLE,
 	REMOVE_ARTICLE,
 	RESET_EDIT_ARTICLE,
-	INITIAL_LOAD
+	ARTICLES_LOADED
 } from "../types";
 
 import axios from "axios";
@@ -35,11 +35,6 @@ export const addArticle = (payload, history) => {
 	history.push("/articles");
 	// post to the server
 	console.log("in addArticle");
-	// // axios.post("http://localhost:8000/api/articles", {
-	// 		title,
-	// 		body,
-	// 		author
-	// 	});
 
 	axios({
 		method: "post",
@@ -76,6 +71,6 @@ export const resetEditArticle = () => ({
 });
 
 export const initalLoad = data => ({
-	type: "ARTICLES_LOADED",
+	type: ARTICLES_LOADED,
 	payload: data.articles
 });

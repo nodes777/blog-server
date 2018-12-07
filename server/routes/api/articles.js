@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const router = require("express").Router();
 // get the Article model from mongoose
 const Articles = mongoose.model("Articles");
+const taylorUserId = require("../../config/keys").session.taylorUserId;
+const bcrypt = require("bcrypt")
 
 // POST to localhost:8000/api/articles/
 /* expects an object like this:
@@ -14,11 +16,20 @@ const Articles = mongoose.model("Articles");
 */
 router.post("/", (req, res, next) => {
 	// get the body from the request
-	const { body } = req;
-	// session is undefined here. Why?
-	console.log(`Sessio, ${req.session.user}`);
-	console.log(req.session);
-	console.log(req);
+	const { body, session } = req;
+
+	console.log(`Session user, ${req.session.user}`);
+	console.log(`taylorUserId, ${taylorUserId}`);
+	console.log(`------------------------------------------`);
+
+	if(req.session.user !== taylorUserId){
+		console.log("Not logged in")
+		return res.status(403).json({
+			errors: {
+				loggedIn: "Not logged in"
+			}
+		});
+	}
 
 	// return error if submitted without a title/author/body
 	if (!body.title) {

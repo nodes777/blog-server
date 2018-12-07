@@ -2,14 +2,17 @@ import map from "lodash/map";
 import filter from "lodash/filter";
 import { combineReducers } from "redux";
 // These imports are just strings of the same name, why?
+// They're used elsewhere as well, better to keep the strings consistent
 import {
 	ADD_ARTICLE,
 	EDIT_ARTICLE,
 	UPDATE_ARTICLE,
 	REMOVE_ARTICLE,
 	RESET_EDIT_ARTICLE,
-	ARTICLES_LOADED
+	ARTICLES_LOADED,
+	LOGGED_IN
 } from "../types";
+
 import uuid from "uuid/v1";
 import moment from "moment";
 import axios from "axios";
@@ -38,7 +41,7 @@ const articlesReducer = (state = initialState, { type, payload }) => {
 		case UPDATE_ARTICLE:
 			console.log("In UPDATE_ARTICLE");
 			console.log(payload);
-			let x = map(
+			let updatedArticles = map(
 				state.articles,
 				article =>
 					// if the article (stored posts) match the payload id
@@ -46,10 +49,10 @@ const articlesReducer = (state = initialState, { type, payload }) => {
 					// else use the article again
 					article.id === payload.id ? { ...payload } : { ...article }
 			);
-			console.log(x);
+			console.log(updatedArticles);
 			return {
 				...state,
-				articles: x
+				articles: updatedArticles
 			};
 		case REMOVE_ARTICLE:
 			console.log("in REMOVE_ARTICLE reducer");
@@ -69,17 +72,30 @@ const articlesReducer = (state = initialState, { type, payload }) => {
 		case RESET_EDIT_ARTICLE:
 			return { ...state, articleToEdit: "" };
 		case ARTICLES_LOADED:
-			console.log("in reducer");
-			console.log(payload);
 			return {
 				...state, // deconstruct this
 				articles: [...payload]
 			};
+		// case LOGGED_IN:
+		// 	console.log("in reducer, case LOGGED_IN");
+		// 	console.log(payload);
+		// 	return { ...state, loggedIn: true };
+		default:
+			return state;
+	}
+};
+
+const loginReducer = (state = initialState, { type, payload }) => {
+	switch (type) {
+		case LOGGED_IN:
+			console.log("in login reducer case");
+			return { ...state, loggedIn: true };
 		default:
 			return state;
 	}
 };
 
 export default combineReducers({
-	blog: articlesReducer
+	blog: articlesReducer,
+	login: loginReducer
 });

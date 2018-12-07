@@ -88,9 +88,9 @@ auth/auth/google/redirect
 
 Had to make sure these all lined up in config/passport.js and Google console and in router
 
-### Session is Undefined Problem
+### Session is Empty Problem
 
-Session is empty when making a post request, but we need it to validate that its me making the POST.
+req.session is empty when making a post request, but I need it to validate a user making the POST.
 
 Session has user info when we return from the auth flow.
 
@@ -108,3 +108,14 @@ using withCredentials set to true when sending the POST from the client:https://
 
 Rearranging the order of middleware:
 Routes must always come afterward
+
+
+### Login action doesnt (fire) connect to reducers.js. 
+
+In Articles.js I wasn't loading the 
+
+`import { logInAction } from "../../actions/loginActions";`
+
+to the dispatch correctly.
+
+I was just importing the function and calling that, instead of calling the function that calls the dispatch which then calls the function.
