@@ -10,19 +10,12 @@ class SingleArticle extends Component {
 			author,
 			createdAt,
 			handleRemoveArticle,
-			handleEditArticle
+			handleEditArticle,
+			isLoggedIn
 		} = this.props;
-		return (
-			<div key={id} className="card my-3">
-				<div className="card-header">{title}</div>
-				<div className="card-body">
-					{body}
-					<p className="mt-5 text-muted">
-						{"posted by"} <b>{author}</b> (
-						{moment(createdAt).fromNow()})
-					</p>
-				</div>
-				<div className="card-footer">
+		let footer;
+		if (isLoggedIn) {
+		      footer = <div className="card-footer">
 					<div className="row">
 						<button
 							className="btn btn-primary mx-3"
@@ -37,7 +30,21 @@ class SingleArticle extends Component {
 							Delete
 						</button>
 					</div>
+				</div>;
+		    } else {
+		      footer = <div className="card-footer"></div>;
+		    }
+		return (
+			<div key={id} className="card my-3">
+				<div className="card-header">{title}</div>
+				<div className="card-body">
+					{body}
+					<p className="mt-5 text-muted">
+						{"posted by"} <b>{author}</b> (
+						{moment(createdAt).fromNow()})
+					</p>
 				</div>
+				{footer}
 			</div>
 		);
 	}

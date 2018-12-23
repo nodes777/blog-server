@@ -5,14 +5,14 @@ import { createStore, combineReducers } from "redux";
 
 // reducers are pure functions that take the previous state and an action
 // reducers return the next state
-import { index } from "./reducers/reducers.js";
-console.log(index)
-const reducers = combineReducers({
-	index
+import reducers  from "./reducers/reducer.js";
+//console.log(reducers)
+const rootReducer = combineReducers({
+	reducers
 });
 
 // The store is made of the reducers
-const store = createStore(reducers);
+const store = createStore(rootReducer);
 
 export default store;
 

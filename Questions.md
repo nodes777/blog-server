@@ -119,3 +119,5 @@ In Articles.js I wasn't loading the
 to the dispatch correctly.
 
 I was just importing the function and calling that, instead of calling the function that calls the dispatch which then calls the function.
+
+### Rerender during axios for articles, clears the isLoggedIn state if the default action is to have it as false.

@@ -1,11 +1,12 @@
-import isEmpty from "lodash/isEmpty";
+import {isEmpty, isEqual} from "lodash";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { connect, getState } from "react-redux";
 import NoArticles from "../../components/NoArticles/noArticles";
 import ShowArticles from "../../components/ShowArticles/showArticles";
 import { removeArticle, initalLoad } from "../../actions/articleActions";
 import { logInAction } from "../../actions/loginActions";
+import store from "../../store"
 
 import axios from "axios";
 
@@ -35,13 +36,8 @@ class Articles extends Component {
       console.log("Url is loggedIn");
       handleLoggedIn(urlLoggedIn);
     } 
-    // Actually logged in check
-    if(loggedIn){
-      console.log(`Logged In Check Passes: ${loggedIn}`)
-      alert("YOU'RE LOGGED IN IN STATE!")
-    }
-  };
 
+  }
   // fat arrow auto binds this
   // move to the articlesform "page"
   handleAddArticle = () => this.props.history.push("/articlesform");
@@ -55,8 +51,9 @@ class Articles extends Component {
   // removeArticle is a method passed in as a prop? It is imported
   handleRemoveArticle = id => this.props.removeArticle(id);
 
-  render = () =>
-    isEmpty(this.props.articles) ? (
+
+  render = () => {
+    return isEmpty(this.props.articles) ? (
       <NoArticles />
     ) : (
       <ShowArticles
@@ -66,8 +63,10 @@ class Articles extends Component {
         handleCancelEdit={this.handleCancelEdit}
         handleEditArticle={this.handleEditArticle}
         handleRemoveArticle={this.handleRemoveArticle}
+        isLoggedIn={this.props.loggedIn}
       />
     );
+  }
 }
 
 Articles.propTypes = {

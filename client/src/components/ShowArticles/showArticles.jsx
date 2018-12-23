@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import ArticlesForm from "../../containers/ArticlesForm/ArticlesForm";
 import SingleArticle from "../../components/ShowArticles/SingleArticle";
+import AddArticleButton from "../../components/ShowArticles/AddArticleButton";
 
 class ShowArticles extends Component {
 	render() {
@@ -13,20 +14,20 @@ class ShowArticles extends Component {
 			handleCancelEdit,
 			handleRemoveArticle,
 			articles,
-			articleToEdit
+			articleToEdit,
+			isLoggedIn
 		} = this.props;
+		console.log(`isLoggedIn: ${isLoggedIn}`)
+		console.log(isLoggedIn)
+		let addArticleButton;
+		if (isLoggedIn) {
+		      addArticleButton = <AddArticleButton onClick={handleAddArticle} />;
+		    } else {
+		      addArticleButton = <div></div>;
+		    }
 		return (
-			<div className="col-12 col-lg-6 offset-lg-3">
-				<div style={{ width: 200, margin: "0 auto" }}>
-					<button
-						style={{ width: 200 }}
-						className="btn btn-primary mx-3"
-						onClick={handleAddArticle}
-					>
-						Add Article
-					</button>
-				</div>
-
+				<div className="col-12 col-lg-6 offset-lg-3">
+				{addArticleButton}
 				{map(articles, ({ id, author, body, createdAt, title }) => {
 					// let id = id;
 					if (articleToEdit === id) {
@@ -51,6 +52,7 @@ class ShowArticles extends Component {
 								title={title}
 								handleRemoveArticle={handleRemoveArticle}
 								handleEditArticle={handleEditArticle}
+								isLoggedIn={isLoggedIn}
 							/>
 						);
 					}

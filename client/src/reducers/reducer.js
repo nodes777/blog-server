@@ -95,7 +95,9 @@ const loginReducer = (state = initialState, { type, payload }) => {
 	}
 };
 
-export default combineReducers({
+const reducers = combineReducers({
 	blog: articlesReducer,
 	login: loginReducer
 });
+
+export default reducers;
