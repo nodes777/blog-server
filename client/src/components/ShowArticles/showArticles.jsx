@@ -5,6 +5,8 @@ import moment from "moment";
 import ArticlesForm from "../../containers/ArticlesForm/ArticlesForm";
 import SingleArticle from "../../components/ShowArticles/SingleArticle";
 import AddArticleButton from "../../components/ShowArticles/AddArticleButton";
+import LogoutButton from "../../components/ShowArticles/LogoutButton";
+
 
 class ShowArticles extends Component {
 	render() {
@@ -15,19 +17,23 @@ class ShowArticles extends Component {
 			handleRemoveArticle,
 			articles,
 			articleToEdit,
-			isLoggedIn
+			isLoggedIn,
+			handleLogout
 		} = this.props;
 		console.log(`isLoggedIn: ${isLoggedIn}`)
 		console.log(isLoggedIn)
-		let addArticleButton;
+		let addArticleButton, logoutButton;
 		if (isLoggedIn) {
 		      addArticleButton = <AddArticleButton onClick={handleAddArticle} />;
+		      logoutButton = <LogoutButton onClick={handleLogout}/>
 		    } else {
 		      addArticleButton = <div></div>;
+		      logoutButton = <div></div>
 		    }
 		return (
 				<div className="col-12 col-lg-6 offset-lg-3">
 				{addArticleButton}
+				{logoutButton}
 				{map(articles, ({ id, author, body, createdAt, title }) => {
 					// let id = id;
 					if (articleToEdit === id) {

@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 
-class AddArticleButton extends Component {
+class LogoutButton extends Component {
 
 	render() {
 			return (				
 					<button
 						style={{ width: 200 }}
-						className="btn btn-primary mx-3"
+						className="btn btn-warning mx-3"
 						onClick={this.handleAddArticle}
 					>
-						Add Article
+						Logout
 					</button>
 				)
 			}
 }
 
-export default AddArticleButton;
+export default LogoutButton;

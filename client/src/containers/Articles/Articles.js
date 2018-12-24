@@ -51,6 +51,9 @@ class Articles extends Component {
   // removeArticle is a method passed in as a prop? It is imported
   handleRemoveArticle = id => this.props.removeArticle(id);
 
+  handleLogout = () => {
+
+  }
 
   render = () => {
     return isEmpty(this.props.articles) ? (
@@ -63,6 +66,7 @@ class Articles extends Component {
         handleCancelEdit={this.handleCancelEdit}
         handleEditArticle={this.handleEditArticle}
         handleRemoveArticle={this.handleRemoveArticle}
+        handleLogout={this.handleLogout}
         isLoggedIn={this.props.loggedIn}
       />
     );
@@ -97,6 +101,9 @@ const mapDispatchToProps = dispatch => {
     },
     handleLoggedIn: urlLoggedIn => {
       dispatch(logInAction(urlLoggedIn));
+    },
+    handleLogout: () => {
+      dispatch(logoutAction());
     }
   };
 };
