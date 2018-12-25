@@ -7,7 +7,7 @@ class LogoutButton extends Component {
 					<button
 						style={{ width: 200 }}
 						className="btn btn-warning mx-3"
-						onClick={this.handleAddArticle}
+						onClick={this.props.handleLogout}
 					>
 						Logout
 					</button>

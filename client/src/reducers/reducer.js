@@ -10,7 +10,8 @@ import {
 	REMOVE_ARTICLE,
 	RESET_EDIT_ARTICLE,
 	ARTICLES_LOADED,
-	LOGGED_IN
+	LOGGED_IN,
+	LOGGED_OUT
 } from "../types";
 
 import uuid from "uuid/v1";
@@ -90,6 +91,9 @@ const loginReducer = (state = initialState, { type, payload }) => {
 		case LOGGED_IN:
 			console.log("in login reducer case");
 			return { ...state, loggedIn: true };
+		case LOGGED_OUT:
+			console.log("in logout reducer case");
+			return { ...state, loggedIn: false };
 		default:
 			return state;
 	}

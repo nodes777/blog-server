@@ -1,4 +1,4 @@
-import { LOGGED_IN } from "../types";
+import { LOGGED_IN, LOGGED_OUT } from "../types";
 
 export const logInAction = payload => {
 	console.log("in loginActions handleLoggedIn");
@@ -9,3 +9,13 @@ export const logInAction = payload => {
 		payload
 	};
 };
+
+export const logOutAction = () => {
+	console.log("in loginActions handleLoggingOut");
+	let payload = "logout"
+	return {
+		type: LOGGED_OUT,
+		payload
+	};
+};
+

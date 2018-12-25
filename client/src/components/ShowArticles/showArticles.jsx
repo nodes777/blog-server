@@ -21,11 +21,11 @@ class ShowArticles extends Component {
 			handleLogout
 		} = this.props;
 		console.log(`isLoggedIn: ${isLoggedIn}`)
-		console.log(isLoggedIn)
+		console.log(handleLogout)
 		let addArticleButton, logoutButton;
 		if (isLoggedIn) {
-		      addArticleButton = <AddArticleButton onClick={handleAddArticle} />;
-		      logoutButton = <LogoutButton onClick={handleLogout}/>
+		      addArticleButton = <AddArticleButton handleAddArticle={handleAddArticle} />;
+		      logoutButton = <LogoutButton handleLogout={handleLogout}/>
 		    } else {
 		      addArticleButton = <div></div>;
 		      logoutButton = <div></div>

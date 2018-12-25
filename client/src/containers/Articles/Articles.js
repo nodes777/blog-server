@@ -5,7 +5,7 @@ import { connect, getState } from "react-redux";
 import NoArticles from "../../components/NoArticles/noArticles";
 import ShowArticles from "../../components/ShowArticles/showArticles";
 import { removeArticle, initalLoad } from "../../actions/articleActions";
-import { logInAction } from "../../actions/loginActions";
+import { logInAction, logOutAction } from "../../actions/loginActions";
 import store from "../../store"
 
 import axios from "axios";
@@ -19,9 +19,8 @@ class Articles extends Component {
   };
 
   componentDidMount = () => {
-    const { onLoad, articles, loggedIn, handleLoggedIn } = this.props;
+    const { onLoad, articles, loggedIn, handleLoggedIn, handleLogout } = this.props;
     const urlLoggedIn = this.props.match.params.id;
-    // need to remove slashes from hash, then don't show up in urlLoggedIn
     console.log(this.props);
 
     // if its the first load, there's no articles, so make a server call, this eventually goes to mLab
@@ -40,7 +39,10 @@ class Articles extends Component {
   }
   // fat arrow auto binds this
   // move to the articlesform "page"
-  handleAddArticle = () => this.props.history.push("/articlesform");
+  handleAddArticle = () => {
+    console.log("clicked add article")
+    this.props.history.push("/articlesform");
+  }
 
   handleCancelEdit = () => this.setState({ articleToEdit: "" });
 
@@ -50,10 +52,6 @@ class Articles extends Component {
 
   // removeArticle is a method passed in as a prop? It is imported
   handleRemoveArticle = id => this.props.removeArticle(id);
-
-  handleLogout = () => {
-
-  }
 
   render = () => {
     return isEmpty(this.props.articles) ? (
@@ -66,7 +64,7 @@ class Articles extends Component {
         handleCancelEdit={this.handleCancelEdit}
         handleEditArticle={this.handleEditArticle}
         handleRemoveArticle={this.handleRemoveArticle}
-        handleLogout={this.handleLogout}
+        handleLogout={this.props.handleLogout}
         isLoggedIn={this.props.loggedIn}
       />
     );
@@ -103,7 +101,8 @@ const mapDispatchToProps = dispatch => {
       dispatch(logInAction(urlLoggedIn));
     },
     handleLogout: () => {
-      dispatch(logoutAction());
+      console.log("click")
+      dispatch(logOutAction());
     }
   };
 };

@@ -7,7 +7,7 @@ class AddArticleButton extends Component {
 					<button
 						style={{ width: 200 }}
 						className="btn btn-primary mx-3"
-						onClick={this.handleAddArticle}
+						onClick={this.props.handleAddArticle}
 					>
 						Add Article
 					</button>
