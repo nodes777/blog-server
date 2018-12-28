@@ -1,6 +1,6 @@
 # Blog-Server
 
-Simple blog created using React.js & Node.js
+Blog created using MongoDB, Express, React.js, & Node.js
 
 ### Prerequisites
 
@@ -46,4 +46,7 @@ npm start
 
 ## Acknowledgments
 
-* **Antonio Erdeljac** - *Initial work for tutorial* - [Blog-Tutorial](https://github.com/AntonioErdeljac/Blog-Tutorial) - [Medium article](https://medium.com/@_aerdeljac/learn-how-to-create-a-simple-blog-with-react-node-c05fa6889de3)
+* **Antonio Erdeljac** - *Initial tutorial* - [Blog-Tutorial](https://github.com/AntonioErdeljac/Blog-Tutorial) - [Medium article](https://medium.com/@_aerdeljac/learn-how-to-create-a-simple-blog-with-react-node-c05fa6889de3)
+
+* **[Matt Corlotta](https://stackoverflow.com/users/7376526/matt-carlotta)
+ ** - *Updating componentWillRecieveProps* - [Stack Overflow](https://stackoverflow.com/questions/52885661/how-to-replace-componentwillrecieveprops/52895358?noredirect=1#comment92715760_52895358) 
